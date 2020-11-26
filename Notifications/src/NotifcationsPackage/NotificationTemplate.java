@@ -1,27 +1,62 @@
 package NotifcationsPackage;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashMap;
 
-public abstract class NotificationTemplate {
-	
-	public HashMap <String, String> argumentsList = new HashMap <String, String>();
-	public abstract void getPlaceholders(String currentTemplate);
-	public abstract void create(String newTemplate);
+public class NotificationTemplate {
 
-	public String read(String table, String id) throws SQLException 
-	{
-		DBConnection.initiateConnection();
-		String sql = String.format("SELECT template FROM %s WHERE id= ?", table);
-		PreparedStatement st = DBConnection.myConn.prepareStatement(sql);
-		st.setString(1, id);
-		var rs = st.executeQuery();
-		rs.next();
-		String template = rs.getString("template");
-		return template;
+	Persistence behaviour;
+	public static HashMap <String, String> argumentsList = new HashMap <String, String>();
+	public NotificationTemplate () {
+		argumentsList.put("Name", "X");
+		argumentsList.put("Var", "X");
+		argumentsList.put("ID", "X");
 	}
-
-	public abstract void update(String newTemplate);
-	public void delete() {}
+	public static void getPlaceholders(String currentTemplate) {
+		int counter = 1;
+		for (int i = 0; i < currentTemplate.length(); i++) {
+			String currentString = "";
+			if (currentTemplate.charAt(i) == '$') {
+				while (currentTemplate.charAt(i + 2) != '}') {
+					currentString = currentString + currentTemplate.charAt(i + 2);
+					i++;
+				} 
+				if (counter == 1) {
+					argumentsList.replace("Name", currentString);
+					counter++;
+					
+				} 
+				else if (counter == 2) {
+					argumentsList.replace("Var", currentString);
+					counter++;
+				} 
+				else if (counter == 3) {
+					argumentsList.replace("ID", currentString);
+					counter++;
+				} 
+				else {
+					break;
+				}
+			}
+		}
+	}
+	
+	public void setBehaviour(Persistence obj) {
+		behaviour = obj;
+	}
+	
+	public void Create(String currentTemplate) {
+		behaviour.create(currentTemplate);
+	}
+	
+	public void delete() {
+		behaviour.delete();
+	}
+	
+	public void read() {
+		behaviour.read();
+	}
+	
+	public void update(String currentTemplate) {
+		behaviour.update(currentTemplate);
+	}
 }

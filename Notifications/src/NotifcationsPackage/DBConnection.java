@@ -10,7 +10,6 @@ public class DBConnection {
 	 {
 		try {
 			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/templates", "root" , "0000");
-
 		}
 		catch (Exception exc) {
 			exc.printStackTrace();

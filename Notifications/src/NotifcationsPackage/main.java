@@ -1,29 +1,42 @@
 package NotifcationsPackage;
-
-import java.sql.SQLException;
-
-/* Queries for database 
-CREATE table signuptemplate(Name varchar(45),Email varchar(45),id varchar(20) UNIQUE,template varchar(100));
-CREATE table bookingtemplate(name varchar(45),item varchar(45),id varchar(20) UNIQUE,template varchar(100));
-CREATE table forgetpasstemplate(name varchar(45),resetpass varchar(45), id varchar(20) UNIQUE,template varchar(100));
+import java.util.Scanner;
+/*
+CREATE database templates;
+use templates;
+CREATE table templatetable(name varchar(45),var varchar(45),id varchar(20) UNIQUE,type varchar(20), template varchar(100));
+*/
+/*
+signup ->       "Hello ${x}, your email is ${y} with request NO. ${z}"
+				"${x}, your email is ${y} with request NO. ${z}"
+booking ->      "Dear ${x}, your order for ${y} is successfully done with NO. ${z}"
+				"${x}, your order for ${y} is successfully done with NO. ${z}"
+forgetpass ->   "Hello ${x}, to reset your password click the following link ${y} . requested NO. ${z}"
+				"${x}, to reset your password click the following link ${y} . requested NO. ${z}"
 */
 public class main {
 
-	public static void main(String[] args) throws SQLException {
-		NotificationTemplate t1 = new SignupTemplate();
-		//t1.create("hello ${ahmed} your email is ${ahmedemail} with request No. ${1}");
-		//t1.update("hello ${ahmed} your email is ${ahmedemail} with request No. ${1} , done");
-		System.out.println(t1.read("signuptemplate ","1"));
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		NotificationTemplate obj = new NotificationTemplate();
+		obj.setBehaviour(new DatabaseOperations());
+		System.out.println("Would u like to 1-create 2-update 3-read 4-delete");
+		int choice = input.nextInt();
+		switch(choice) {
+		case 1:
+			obj.Create("Dear ${john}, your order for ${laptop} is successfully done with NO. ${11}");
+			break;
+		case 2:
+			obj.update("${john}, your order for ${laptop} is successfully done with NO. ${11}");
+			break;
+		case 3:
+			obj.read();
+			break;
+		case 4:
+			obj.delete();
+			break;
+		}
+		input.close();
+		
+	}
 
-		NotificationTemplate t2 = new ForgetPassTemplate();
-		//t2.create("Dear ${Ali} your can reset your passworf from ${link} with request No. ${1}");
-		//t2.update("Dear ${Ali} your can reset your passworf from ${link} with request No. ${1} ,thank u");
-		System.out.println(t2.read("forgetpasstemplate ","1"));
-
-		NotificationTemplate t3 = new BookingTemplate();
-		//t3.create("Dear ${hassan} your booking of the item ${mobile charger} with request No. ${1} is confirmed");
-		//t3.update("Dear ${hassan} your booking of the item ${mobile charger} with request No. ${1} is confirmed,thanks for using our store ");
-		System.out.println(t3.read("bookingtemplate ","1"));
-
-}
 }
