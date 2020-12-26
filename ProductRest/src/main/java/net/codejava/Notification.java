@@ -1,18 +1,15 @@
 package net.codejava;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class Notification {
-	private static String content="";
+	private String content="";
 	
 	public Notification()
 	{
 		
 	}
-	public Notification(String content, int id) {
+	public Notification(String content) {
 		super();
-		Notification.content = content;
+		this.content = content;
 	}
 	
 	
@@ -21,27 +18,11 @@ public class Notification {
 	}
 	
 	public void setContent(String content) {
-		Notification.content = content;
+		this.content = content;
 	}
 	
-	public void prepareNotification(String msg) {
-		String [] values = {"hussien", "mobile"};
-		int index = 0;
-		int i = 0;
-		while(true) {
-			if(msg.indexOf("$", index) == -1) {
-				break;
-			}
-			String temp = msg.substring(msg.indexOf("$", index), msg.indexOf("}", index)+1);
-			index = msg.indexOf("}", index)+1;
-			msg = msg.replace(temp, values[i]);
-			i++;
-		}
-		setContent(msg);
+	@Override
+	public String toString() {
+		return "Notification [content=" + content + "]";
 	}
-	
-	
-	
-	
-
 }

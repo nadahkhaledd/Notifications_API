@@ -19,25 +19,41 @@ public class NotificationController {
 
 	Queue<Notification> SMS = new LinkedList<>();
 	
-	public static Notification obj = new Notification();
+	public Notification obj = new Notification();
 	
 	@Autowired
 	private TemplateService service;
 	
-	@GetMapping("/templates/{type}")
-	public ResponseEntity<Template> get(@PathVariable String type) {
+	public void prepareNotification(String msg) {
+		String [] values = {"hussien", "mobile"};
+		int index = 0;
+		int i = 0;
+		while(true) {
+			if(msg.indexOf("$", index) == -1) {
+				break;
+			}
+			String temp = msg.substring(msg.indexOf("$", index), msg.indexOf("}", index)+1);
+			index = msg.indexOf("}", index)+1;
+			msg = msg.replace(temp, values[i]);
+			i++;
+		}
+		obj.setContent(msg);
+	}
+	
+	@GetMapping("/templates2/{type}")
+	public ResponseEntity<?> getByType(@PathVariable String type) {
 		try {
-			 Template template = service.get(type);
-			 return new ResponseEntity<Template>(template, HttpStatus.OK);
-			 //System.out.println(template.getTemplate());
-			 /*obj.prepareNotification(template.getTemplate());
-			 System.out.println(obj.getContent());
-			 SMS.add(obj);*/
+			 List<Template> templates = service.getByType(type);
+			 for(int i = 0; i < templates.size(); i++) {
+				 prepareNotification(templates.get(i).getText());
+				 SMS.add(obj);
+			 }
+		     System.out.println("Queue: " + SMS);
+			 System.out.println("........");
+			 return new ResponseEntity<>(templates, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
-			//System.out.println("Not Found");
 			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
 }

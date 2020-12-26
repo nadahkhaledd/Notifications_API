@@ -11,26 +11,41 @@ public class Template {
 	private String text;
 	private int id;
 	private String type;
-	private String sec_type;
+	private String category;
 
 	public Template() {
 	}
 
-	public Template(String text, int id, String type) {
+	
+	public Template(String text, int id, String type, String category) {
 		super();
 		this.text = text;
 		this.id = id;
 		this.type = type;
+		this.category = category;
 	}
 
-	public String getTemplate() {
+
+	public String getText() {
 		return text;
 	}
 
-	public void setTemplate(String text) {
+
+	public void setText(String text) {
 		this.text = text;
 	}
-	
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
@@ -47,12 +62,5 @@ public class Template {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-	public String getSecType() {
-		return sec_type;
-	}
-
-	public void setSecType(String sec_type) {
-		this.sec_type = sec_type;
 	}
 }

@@ -25,29 +25,27 @@ public class TemplateController {
 		return service.listAll();
 	}
 	
-	/*@GetMapping("/templates/{id}")
-	public ResponseEntity<Template> get(@PathVariable int id) {
+	@GetMapping("/templates/{id}")
+	public ResponseEntity<Template> getByID(@PathVariable Integer id) {
 		try {
-			Template template = service.get(id);
+			Template template = service.getByID(id);
 			return new ResponseEntity<Template>(template, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
 			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
-	}*/
-	
-	
+	}
 	
 	@PostMapping("/templates")
-	public void add(@RequestBody Template text) {
-		service.save(text);
+	public void add(@RequestBody Template template) {
+		service.save(template);
 	}
 	
 	@PutMapping("/templates/{id}")
-	public ResponseEntity<?> update(@RequestBody Template text, @PathVariable int id) {
+	public ResponseEntity<?> update(@RequestBody Template template, @PathVariable int id) {
 		try {
-			Template existtemplate = service.get(id);
-			service.save(text);
+			Template existtemplate = service.getByID(id);
+			service.save(template);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
@@ -59,5 +57,4 @@ public class TemplateController {
 	public void delete(@PathVariable int id) {
 		service.delete(id);
 	}
-	
 }
