@@ -8,26 +8,27 @@ import javax.persistence.Id;
 @Entity
 
 public class Template {
-	private String template;
+	private String text;
 	private int id;
 	private String type;
+	private String sec_type;
 
 	public Template() {
 	}
 
-	public Template(String template, int id, String type) {
+	public Template(String text, int id, String type) {
 		super();
-		this.template = template;
+		this.text = text;
 		this.id = id;
 		this.type = type;
 	}
 
 	public String getTemplate() {
-		return template;
+		return text;
 	}
 
-	public void setTemplate(String template) {
-		this.template = template;
+	public void setTemplate(String text) {
+		this.text = text;
 	}
 	
 	@Id
@@ -46,5 +47,12 @@ public class Template {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getSecType() {
+		return sec_type;
+	}
+
+	public void setSecType(String sec_type) {
+		this.sec_type = sec_type;
 	}
 }

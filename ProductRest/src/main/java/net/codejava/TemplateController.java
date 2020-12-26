@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class TemplateController {
 		return service.listAll();
 	}
 	
-	@GetMapping("/templates/{id}")
+	/*@GetMapping("/templates/{id}")
 	public ResponseEntity<Template> get(@PathVariable int id) {
 		try {
 			Template template = service.get(id);
@@ -33,17 +34,20 @@ public class TemplateController {
 		catch(NoSuchElementException e) {
 			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
-	}
+	}*/
 	
-	public void add(@RequestBody Template template) {
-		service.save(template);
+	
+	
+	@PostMapping("/templates")
+	public void add(@RequestBody Template text) {
+		service.save(text);
 	}
 	
 	@PutMapping("/templates/{id}")
-	public ResponseEntity<?> get(@RequestBody Template template, @PathVariable int id) {
+	public ResponseEntity<?> update(@RequestBody Template text, @PathVariable int id) {
 		try {
 			Template existtemplate = service.get(id);
-			service.save(template);
+			service.save(text);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
