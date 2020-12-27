@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface TemplateRepository extends JpaRepository<Template, Integer> {
 	
 	@Query("SELECT t FROM Template t WHERE t.type = :type and t.category = :category")
-    public Template findByType(String type, String category);
+    Template findByType(String type, String category);
 
 }
