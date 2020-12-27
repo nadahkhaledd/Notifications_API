@@ -2,7 +2,6 @@ package net.codejava;
 
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,12 +22,11 @@ public class NotificationController {
 	
 	@Autowired
 	private TemplateService service;
+	@Autowired
 	private NotificationService service2;
-	private NotificationDB notify;
 	
 	public Notification prepareNotification(String msg, String[] values) {
 		Notification obj = new Notification();
-		//String [] values = {"hussien", "mobile"};
 		int index = 0;
 		int i = 0;
 		while(true) {
@@ -45,8 +42,16 @@ public class NotificationController {
 		return obj;
 	}
 	
+	public void saveNotification(String content, String method, String target) {
+		NotificationDB notify = new NotificationDB();
+		notify.setContent(content);
+		notify.setMethod(method);
+		notify.setTarget(target);
+		service2.save(notify);
+	}
+	
 	@GetMapping("/templates2/{type}/{category}")
-	public ResponseEntity<?> getByType(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
+	public ResponseEntity<?> getRequest(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
 			 Template template = service.getByType(type, category);
 		     Notification obj = new Notification();
@@ -55,13 +60,11 @@ public class NotificationController {
 			 {
 				 SMS.add(obj);
 			 }
-			 else
+			 else if(request.getMethod().equalsIgnoreCase("mail"))
 			 {
 				 MAIL.add(obj);
 			 }
-			 System.out.println("Queue SMS: " + SMS);
-			 System.out.println("Queue MAIL: " + MAIL);  
-			 System.out.println("........");
+			 saveNotification(obj.getContent(), request.getMethod(), request.getTarget());
 			 return new ResponseEntity<>(template, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {

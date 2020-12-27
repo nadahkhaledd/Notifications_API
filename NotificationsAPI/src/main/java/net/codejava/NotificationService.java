@@ -23,6 +23,7 @@ public class NotificationService {
 	public void delete(int id) {
 		repo.deleteById(id);
 	}
+	
 	public void save(NotificationDB notification) {
 		repo.save(notification);
 	}

@@ -51,9 +51,4 @@ public class NotificationDB {
 	public void setTarget(String target) {
 		this.target = target;
 	}
-	
-	
-	
-	
-
 }
