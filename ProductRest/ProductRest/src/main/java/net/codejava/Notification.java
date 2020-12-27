@@ -23,6 +23,6 @@ public class Notification {
 	
 	@Override
 	public String toString() {
-		return "Notification [content=" + content + "]";
+		return "Notification : " + content ;
 	}
 }

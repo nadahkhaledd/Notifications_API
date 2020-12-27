@@ -11,21 +11,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class NotificationController {
 
 	Queue<Notification> SMS = new LinkedList<>();
+	Queue<Notification> MAIL = new LinkedList<>();
 	
-	public Notification obj = new Notification();
 	
 	@Autowired
 	private TemplateService service;
+	private NotificationService service2;
+	private NotificationDB notify;
 	
-	public void prepareNotification(String msg) {
-		String [] values = {"hussien", "mobile"};
+	public Notification prepareNotification(String msg, String[] values) {
+		Notification obj = new Notification();
+		//String [] values = {"hussien", "mobile"};
 		int index = 0;
 		int i = 0;
 		while(true) {
@@ -38,19 +42,27 @@ public class NotificationController {
 			i++;
 		}
 		obj.setContent(msg);
+		return obj;
 	}
 	
-	@GetMapping("/templates2/{type}")
-	public ResponseEntity<?> getByType(@PathVariable String type) {
+	@GetMapping("/templates2/{type}/{category}")
+	public ResponseEntity<?> getByType(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
-			 List<Template> templates = service.getByType(type);
-			 for(int i = 0; i < templates.size(); i++) {
-				 prepareNotification(templates.get(i).getText());
+			 Template template = service.getByType(type, category);
+		     Notification obj = new Notification();
+			 obj = prepareNotification(template.getText(), request.getValues());
+			 if(request.getMethod().equalsIgnoreCase("sms"))
+			 {
 				 SMS.add(obj);
 			 }
-		     System.out.println("Queue: " + SMS);
+			 else
+			 {
+				 MAIL.add(obj);
+			 }
+			 System.out.println("Queue SMS: " + SMS);
+			 System.out.println("Queue MAIL: " + MAIL);  
 			 System.out.println("........");
-			 return new ResponseEntity<>(templates, HttpStatus.OK);
+			 return new ResponseEntity<>(template, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
 			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
