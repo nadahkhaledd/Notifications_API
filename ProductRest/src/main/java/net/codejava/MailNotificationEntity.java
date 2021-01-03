@@ -6,18 +6,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class mailtable {
+public class MailNotificationEntity {
 	
 	int id;
 	String content;
 	String target;
 	
 	
-	public mailtable() {
+	public MailNotificationEntity() {
 		super();
 	}
 
-	public mailtable(int id, String content, String target) {
+	public MailNotificationEntity(int id, String content, String target) {
 		super();
 		this.id = id;
 		this.content = content;

@@ -5,18 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
-public class smsService {
+public class MailNotificationService {
 	
 	@Autowired
-	private smsRepository repo;
-
-	public List<SMSTable> listAll() {
+	private MailNotificationRepository repo;
+	
+	public List<MailNotificationEntity> listAll() {
 		return repo.findAll();
 	}
 	
-	public SMSTable getByID(int id) {
+	public MailNotificationEntity getByID(int id) {
 		return repo.findById(id).get();
 	}
 	
@@ -24,7 +23,11 @@ public class smsService {
 		repo.deleteById(id);
 	}
 	
-	public void save(SMSTable notification) {
+	public void save(MailNotificationEntity notification) {
 		repo.save(notification);
 	}
+	
+	
+
+
 }

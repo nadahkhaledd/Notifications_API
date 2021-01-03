@@ -7,17 +7,17 @@ import javax.persistence.Id;
 
 @Entity
 
-public class Template {
+public class TemplateEntity {
 	private String text;
 	private int id;
 	private String type;
 	private String category;
 
-	public Template() {
+	public TemplateEntity() {
 	}
 
 	
-	public Template(String text, int id, String type, String category) {
+	public TemplateEntity(String text, int id, String type, String category) {
 		super();
 		this.text = text;
 		this.id = id;
