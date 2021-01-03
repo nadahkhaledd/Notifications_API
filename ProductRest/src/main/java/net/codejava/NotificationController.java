@@ -71,8 +71,8 @@ public class NotificationController {
 	
 	public void saveNotification(String content, String method, String target) {
 		
-		SMSNotificationEntity notifySMS = new SMSNotificationEntity();
-		MailNotificationEntity notifyMAIL = new MailNotificationEntity();
+		SMS notifySMS = new SMS();
+		MAIL notifyMAIL = new MAIL();
 		
 		if(method.equalsIgnoreCase("sms"))
 		{
@@ -97,7 +97,7 @@ public class NotificationController {
 			 if(!response.equalsIgnoreCase("Valid")) {
 				 return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
 			 }
-			 TemplateEntity template = service.getByType(type, category);
+			 Template template = service.getByType(type, category);
 		     Notification obj = new Notification();
 			 obj = prepareNotification(template.getText(), request.getValues());
 			 if(request.getMethod().equalsIgnoreCase("sms"))
@@ -112,7 +112,7 @@ public class NotificationController {
 			 return new ResponseEntity<>(template, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
-			return new ResponseEntity<TemplateEntity>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
 	}
 }

@@ -24,6 +24,13 @@ public class Template {
 		this.type = type;
 		this.category = category;
 	}
+	
+	public Template(String text, String type, String category) {
+		super();
+		this.text = text;
+		this.type = type;
+		this.category = category;
+	}
 
 
 	public String getText() {

@@ -11,19 +11,19 @@ public class TemplateService {
 	@Autowired
 	private TemplateRepository repo;
 	
-	public List<TemplateEntity> listAll() {
+	public List<Template> listAll() {
 		return repo.findAll();
 	}
 	
-	public void save(TemplateEntity template) {
+	public void save(Template template) {
 		repo.save(template);
 	}
 	
-	public TemplateEntity getByID(int id) {
+	public Template getByID(int id) {
 		return repo.findById(id).get();
 	}
 
-	public TemplateEntity getByType(String type, String category) {
+	public Template getByType(String type, String category) {
 		return repo.findByType(type,category);
 	}
 	

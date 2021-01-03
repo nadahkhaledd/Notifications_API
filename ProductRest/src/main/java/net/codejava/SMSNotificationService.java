@@ -12,11 +12,11 @@ public class SMSNotificationService {
 	@Autowired
 	private SMSNotificationRepository repo;
 
-	public List<SMSNotificationEntity> listAll() {
+	public List<SMS> listAll() {
 		return repo.findAll();
 	}
 	
-	public SMSNotificationEntity getByID(int id) {
+	public SMS getByID(int id) {
 		return repo.findById(id).get();
 	}
 	
@@ -24,7 +24,7 @@ public class SMSNotificationService {
 		repo.deleteById(id);
 	}
 	
-	public void save(SMSNotificationEntity notification) {
+	public void save(SMS notification) {
 		repo.save(notification);
 	}
 }

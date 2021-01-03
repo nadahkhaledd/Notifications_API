@@ -6,28 +6,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-
-public class SMSNotificationEntity {
-	String content;
+public class MAIL {
+	
 	int id;
+	String content;
 	String target;
 	
-	public SMSNotificationEntity()
-	{
-		
-	}
-	public SMSNotificationEntity(String content, int id, String target) {
+	
+	public MAIL() {
 		super();
-		this.content = content;
+	}
+
+	public MAIL(int id, String content, String target) {
+		super();
 		this.id = id;
+		this.content = content;
 		this.target = target;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +33,20 @@ public class SMSNotificationEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getTarget() {
 		return target;
 	}
 	public void setTarget(String target) {
 		this.target = target;
 	}
+	
+	
+	
+
 }

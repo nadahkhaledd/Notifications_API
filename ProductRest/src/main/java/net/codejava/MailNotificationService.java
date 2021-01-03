@@ -11,11 +11,11 @@ public class MailNotificationService {
 	@Autowired
 	private MailNotificationRepository repo;
 	
-	public List<MailNotificationEntity> listAll() {
+	public List<MAIL> listAll() {
 		return repo.findAll();
 	}
 	
-	public MailNotificationEntity getByID(int id) {
+	public MAIL getByID(int id) {
 		return repo.findById(id).get();
 	}
 	
@@ -23,7 +23,7 @@ public class MailNotificationService {
 		repo.deleteById(id);
 	}
 	
-	public void save(MailNotificationEntity notification) {
+	public void save(MAIL notification) {
 		repo.save(notification);
 	}
 	

@@ -7,16 +7,16 @@ import javax.persistence.Id;
 
 @Entity
 
-public class SMSTable {
+public class SMS {
 	String content;
 	int id;
 	String target;
 	
-	public SMSTable()
+	public SMS()
 	{
 		
 	}
-	public SMSTable(String content, int id, String target) {
+	public SMS(String content, int id, String target) {
 		super();
 		this.content = content;
 		this.id = id;
