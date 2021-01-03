@@ -1,13 +1,13 @@
 package net.codejava;
 
-public class Notification {
+public class Notifications {
 	private String content="";
 	
-	public Notification()
+	public Notifications()
 	{
 		
 	}
-	public Notification(String content) {
+	public Notifications(String content) {
 		super();
 		this.content = content;
 	}

@@ -2,6 +2,6 @@ package net.codejava;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NotificationRepository extends JpaRepository<NotificationDB, Integer> {
+public interface MAILRepository extends JpaRepository<mailtable, Integer> {
 
 }

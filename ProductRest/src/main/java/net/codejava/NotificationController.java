@@ -16,17 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NotificationController {
 
-	Queue<Notification> SMS = new LinkedList<>();
-	Queue<Notification> MAIL = new LinkedList<>();
+	Queue<Notifications> SMS = new LinkedList<>();
+	Queue<Notifications> MAIL = new LinkedList<>();
 	
 	
 	@Autowired
 	private TemplateService service;
 	@Autowired
-	private NotificationService service2;
+	private smsService serviceSMS;
+	@Autowired
+	private MAILService serviceMAIL;
 	
-	public Notification prepareNotification(String msg, String[] values) {
-		Notification obj = new Notification();
+	public Notifications prepareNotification(String msg, String[] values) {
+		Notifications obj = new Notifications();
 		int index = 0;
 		int i = 0;
 		while(true) {
@@ -43,18 +45,31 @@ public class NotificationController {
 	}
 	
 	public void saveNotification(String content, String method, String target) {
-		NotificationDB notify = new NotificationDB();
-		notify.setContent(content);
-		notify.setMethod(method);
-		notify.setTarget(target);
-		service2.save(notify);
+		
+		SMSTable notifySMS = new SMSTable();
+		mailtable notifyMAIL = new mailtable();
+		
+		if(method.equalsIgnoreCase("sms"))
+		{
+			notifySMS.setContent(content);
+			notifySMS.setTarget(target);
+			serviceSMS.save(notifySMS);
+		}
+		else
+		{
+			notifyMAIL.setContent(content);
+			notifyMAIL.setTarget(target);
+			serviceMAIL.save(notifyMAIL);
+		}
+		
+		
 	}
 	
 	@GetMapping("/templates2/{type}/{category}")
 	public ResponseEntity<?> getRequest(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
 			 Template template = service.getByType(type, category);
-		     Notification obj = new Notification();
+		     Notifications obj = new Notifications();
 			 obj = prepareNotification(template.getText(), request.getValues());
 			 if(request.getMethod().equalsIgnoreCase("sms"))
 			 {

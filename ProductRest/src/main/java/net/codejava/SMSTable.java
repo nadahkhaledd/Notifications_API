@@ -7,21 +7,19 @@ import javax.persistence.Id;
 
 @Entity
 
-public class NotificationDB {
+public class SMSTable {
 	String content;
 	int id;
-	String method;
 	String target;
 	
-	public NotificationDB()
+	public SMSTable()
 	{
 		
 	}
-	public NotificationDB(String content, int id, String method, String target) {
+	public SMSTable(String content, int id, String target) {
 		super();
 		this.content = content;
 		this.id = id;
-		this.method = method;
 		this.target = target;
 	}
 	public String getContent() {
@@ -39,12 +37,8 @@ public class NotificationDB {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getMethod() {
-		return method;
-	}
-	public void setMethod(String method) {
-		this.method = method;
-	}
+
+
 	public String getTarget() {
 		return target;
 	}

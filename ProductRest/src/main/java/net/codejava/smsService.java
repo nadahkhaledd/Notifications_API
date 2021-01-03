@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class NotificationService {
+public class smsService {
 	
 	@Autowired
-	private NotificationRepository repo;
+	private smsRepository repo;
 
-	public List<NotificationDB> listAll() {
+	public List<SMSTable> listAll() {
 		return repo.findAll();
 	}
 	
-	public NotificationDB getByID(int id) {
+	public SMSTable getByID(int id) {
 		return repo.findById(id).get();
 	}
 	
@@ -24,7 +24,7 @@ public class NotificationService {
 		repo.deleteById(id);
 	}
 	
-	public void save(NotificationDB notification) {
+	public void save(SMSTable notification) {
 		repo.save(notification);
 	}
 }
