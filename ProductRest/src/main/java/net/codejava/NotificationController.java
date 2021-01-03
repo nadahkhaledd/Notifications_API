@@ -4,8 +4,6 @@ package net.codejava;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,19 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NotificationController {
 
-	Queue<Notification> SMS = new LinkedList<>();
-	Queue<Notification> MAIL = new LinkedList<>();
+	Queue<Notifications> SMS = new LinkedList<>();
+	Queue<Notifications> MAIL = new LinkedList<>();
 	
 	
 	@Autowired
 	private TemplateService service;
 	@Autowired
-	private SMSNotificationService serviceSMS;
+	private smsService serviceSMS;
 	@Autowired
-	private MailNotificationService serviceMAIL;
+	private MAILService serviceMAIL;
 	
-	public Notification prepareNotification(String msg, String[] values) {
-		Notification obj = new Notification();
+	public Notifications prepareNotification(String msg, String[] values) {
+		Notifications obj = new Notifications();
 		int index = 0;
 		int i = 0;
 		while(true) {
@@ -45,34 +43,11 @@ public class NotificationController {
 		obj.setContent(msg);
 		return obj;
 	}
-	public String validateRequest(Request request) {
-		String response = "Valid";
-		if(!(request.getMethod().equalsIgnoreCase("mail") || request.getMethod().equalsIgnoreCase("sms"))) {
-			response = "Method is not valid";
-			return response;
-		}
-		if(request.getMethod().equalsIgnoreCase("sms")) {
-			if (!request.getTarget().matches("[0-9]+")) {
-				response = "target doesn't match method requirements, a number should be provided";
-				return response;
-			}
-		}
-		else {
-			String regex = "^(.+)@(.+)$";
-			Pattern pattern = Pattern.compile(regex);
-			Matcher matcher = pattern.matcher(request.getTarget());
-			if (!matcher.matches()) {
-				response = "target doesn't match method requirements, an email should be provided";
-				return response;
-			}
-		}
-		return response;
-	}
 	
 	public void saveNotification(String content, String method, String target) {
 		
-		SMSNotificationEntity notifySMS = new SMSNotificationEntity();
-		MailNotificationEntity notifyMAIL = new MailNotificationEntity();
+		SMSTable notifySMS = new SMSTable();
+		mailtable notifyMAIL = new mailtable();
 		
 		if(method.equalsIgnoreCase("sms"))
 		{
@@ -93,12 +68,8 @@ public class NotificationController {
 	@GetMapping("/templates2/{type}/{category}")
 	public ResponseEntity<?> getRequest(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
-			 String response = validateRequest(request);
-			 if(!response.equalsIgnoreCase("Valid")) {
-				 return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
-			 }
-			 TemplateEntity template = service.getByType(type, category);
-		     Notification obj = new Notification();
+			 Template template = service.getByType(type, category);
+		     Notifications obj = new Notifications();
 			 obj = prepareNotification(template.getText(), request.getValues());
 			 if(request.getMethod().equalsIgnoreCase("sms"))
 			 {
@@ -112,7 +83,7 @@ public class NotificationController {
 			 return new ResponseEntity<>(template, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
-			return new ResponseEntity<TemplateEntity>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
 	}
 }

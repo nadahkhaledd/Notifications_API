@@ -21,30 +21,30 @@ public class TemplateController {
 	private TemplateService service;
 	
 	@GetMapping("/templates")
-	public List<TemplateEntity> list() {
+	public List<Template> list() {
 		return service.listAll();
 	}
 	
 	@GetMapping("/templates/{id}")
-	public ResponseEntity<TemplateEntity> getByID(@PathVariable Integer id) {
+	public ResponseEntity<Template> getByID(@PathVariable Integer id) {
 		try {
-			TemplateEntity template = service.getByID(id);
-			return new ResponseEntity<TemplateEntity>(template, HttpStatus.OK);
+			Template template = service.getByID(id);
+			return new ResponseEntity<Template>(template, HttpStatus.OK);
 		}
 		catch(NoSuchElementException e) {
-			return new ResponseEntity<TemplateEntity>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@PostMapping("/templates")
-	public void add(@RequestBody TemplateEntity template) {
+	public void add(@RequestBody Template template) {
 		service.save(template);
 	}
 	
 	@PutMapping("/templates/{id}")
-	public ResponseEntity<?> update(@RequestBody TemplateEntity template, @PathVariable int id) {
+	public ResponseEntity<?> update(@RequestBody Template template, @PathVariable int id) {
 		try {
-			TemplateEntity existtemplate = service.getByID(id);
+			Template existtemplate = service.getByID(id);
 			service.save(template);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
