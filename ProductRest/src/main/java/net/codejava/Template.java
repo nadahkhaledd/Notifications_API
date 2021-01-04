@@ -15,7 +15,6 @@ public class Template {
 
 	public Template() {
 	}
-
 	
 	public Template(String text, int id, String type, String category) {
 		super();
@@ -32,26 +31,21 @@ public class Template {
 		this.category = category;
 	}
 
-
 	public String getText() {
 		return text;
 	}
-
 
 	public void setText(String text) {
 		this.text = text;
 	}
 
-
 	public String getCategory() {
 		return category;
 	}
 
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -24,7 +24,7 @@ public class TemplateService {
 	}
 
 	public Template getByType(String type, String category) {
-		return repo.findByType(type,category);
+		return repo.findByType(type, category);
 	}
 	
 	public void delete(int id) {

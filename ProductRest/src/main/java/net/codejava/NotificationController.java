@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -86,8 +87,38 @@ public class NotificationController {
 			notifyMAIL.setTarget(target);
 			serviceMAIL.save(notifyMAIL);
 		}
-		
-		
+	}
+	
+	@GetMapping("/templates3/{id}")
+	public ResponseEntity<SMS> getSMSByID(@PathVariable Integer id) {
+		try {
+			SMS obj = serviceSMS.getByID(id);
+			return new ResponseEntity<SMS>(obj, HttpStatus.OK);
+		}
+		catch(NoSuchElementException e) {
+			return new ResponseEntity<SMS>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/templates4/{id}")
+	public ResponseEntity<MAIL> getMAILByID(@PathVariable Integer id) {
+		try {
+			MAIL obj = serviceMAIL.getByID(id);
+			return new ResponseEntity<MAIL>(obj, HttpStatus.OK);
+		}
+		catch(NoSuchElementException e) {
+			return new ResponseEntity<MAIL>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@DeleteMapping("/templates3/{id}")
+	public void deleteSMS(@PathVariable int id) {
+		serviceSMS.delete(id);
+	}
+	
+	@DeleteMapping("/templates4/{id}")
+	public void deleteMAIL(@PathVariable int id) {
+		serviceMAIL.delete(id);
 	}
 	
 	@GetMapping("/templates2/{type}/{category}")
