@@ -15,16 +15,16 @@ public class Client {
 	
 	public static void dequeueSMS() {
 		try {
-		SMS obj = restTemplate.getForObject(GET_FIRST_ID_SMS, SMS.class);
-		System.out.println("Notification sent : " + obj.getContent() + "\n");
-		delete_SMS(obj.getId());
+			SMS obj = restTemplate.getForObject(GET_FIRST_ID_SMS, SMS.class);
+			System.out.println("Notification sent : " + obj.getContent() + "\n");
+			deleteSMS(obj.getId());
 		}
 		catch(Exception e) {
 			System.out.println("Queue is empty");
 		}
 	}
 	
-	public static void delete_SMS(int id) {
+	public static void deleteSMS(int id) {
 		Map<String, Integer> param = new HashMap<>();
 		param.put("id", id);
 		restTemplate.delete(DELETE_SMS, param);
@@ -34,14 +34,14 @@ public class Client {
 		try {
 			MAIL obj = restTemplate.getForObject(GET_FIRST_ID_MAIL, MAIL.class);
 			System.out.println("Notification sent: " + obj.getContent() + "\n");
-			delete_MAIL(obj.getId());
+			deleteMAIL(obj.getId());
 		} 
 		catch (Exception e)  {
 			System.out.println("Queue is empty");
 		}
 	}
 	
-	public static void delete_MAIL(int id) {
+	public static void deleteMAIL(int id) {
 		Map<String, Integer> param = new HashMap<>();
 		param.put("id", id);
 		restTemplate.delete(DELETE_MAIL, param);
