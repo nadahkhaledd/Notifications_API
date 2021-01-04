@@ -48,6 +48,7 @@ public class TemplateController {
 			service.save(template);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
+		
 		catch(NoSuchElementException e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

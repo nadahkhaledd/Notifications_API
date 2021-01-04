@@ -27,13 +27,8 @@ public class MailNotificationService {
 		repo.save(notification);
 	}
 	
-	
-	public MAIL getFirstID()
-	{
-		
+	public MAIL getFirstID() {
 		return repo.findFirstID();
 	}
-	
-
 
 }

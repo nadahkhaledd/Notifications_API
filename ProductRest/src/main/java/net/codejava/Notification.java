@@ -1,17 +1,17 @@
 package net.codejava;
 
 public class Notification {
-	private String content="";
 	
-	public Notification()
-	{
-		
+	private String content;
+	
+	public Notification() {
+		content = "";
 	}
+	
 	public Notification(String content) {
 		super();
 		this.content = content;
 	}
-	
 	
 	public String getContent() {
 		return content;
@@ -19,10 +19,5 @@ public class Notification {
 	
 	public void setContent(String content) {
 		this.content = content;
-	}
-	
-	@Override
-	public String toString() {
-		return "Notification " + content + "]";
 	}
 }

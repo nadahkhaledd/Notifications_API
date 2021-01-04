@@ -12,19 +12,21 @@ public class SMS {
 	int id;
 	String target;
 	
-	public SMS()
-	{
+	public SMS() {
 		
 	}
+	
 	public SMS(String content, int id, String target) {
 		super();
 		this.content = content;
 		this.id = id;
 		this.target = target;
 	}
+	
 	public String getContent() {
 		return content;
 	}
+	
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -34,14 +36,15 @@ public class SMS {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public String getTarget() {
 		return target;
 	}
+	
 	public void setTarget(String target) {
 		this.target = target;
 	}

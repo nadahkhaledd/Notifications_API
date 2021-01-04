@@ -14,6 +14,7 @@ public class Template {
 	private String category;
 
 	public Template() {
+		
 	}
 	
 	public Template(String text, int id, String type, String category) {

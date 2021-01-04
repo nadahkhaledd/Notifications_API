@@ -12,7 +12,6 @@ public class MAIL {
 	String content;
 	String target;
 	
-	
 	public MAIL() {
 		super();
 	}
@@ -24,29 +23,30 @@ public class MAIL {
 		this.target = target;
 	}
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getContent() {
 		return content;
 	}
+	
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
 	public String getTarget() {
 		return target;
 	}
+	
 	public void setTarget(String target) {
 		this.target = target;
 	}
 	
-	
-	
-
 }
