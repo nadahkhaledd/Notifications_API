@@ -33,7 +33,7 @@ public class Client {
 	public static void dequeueMAIL() {
 		try {
 			MAIL obj = restTemplate.getForObject(GET_FIRST_ID_MAIL, MAIL.class);
-			System.out.println("\nNotification sent: " + obj.getContent() + "\n");
+			System.out.println("Notification sent: " + obj.getContent() + "\n");
 			delete_MAIL(obj.getId());
 		} 
 		catch (Exception e)  {

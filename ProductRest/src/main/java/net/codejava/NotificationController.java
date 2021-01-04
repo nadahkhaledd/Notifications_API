@@ -68,7 +68,6 @@ public class NotificationController {
 	}
 	
 	public void saveNotification(String content, String method, String target) {
-		
 		SMS notifySMS = new SMS();
 		MAIL notifyMAIL = new MAIL();
 		if(method.equalsIgnoreCase("sms")) {
