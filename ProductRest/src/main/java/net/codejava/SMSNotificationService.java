@@ -27,4 +27,10 @@ public class SMSNotificationService {
 	public void save(SMS notification) {
 		repo.save(notification);
 	}
+	
+	public SMS getFirstID()
+	{
+		
+		return repo.findFirstID();
+	}
 }

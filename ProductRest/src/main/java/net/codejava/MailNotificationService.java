@@ -28,6 +28,12 @@ public class MailNotificationService {
 	}
 	
 	
+	public MAIL getFirstID()
+	{
+		
+		return repo.findFirstID();
+	}
+	
 
 
 }

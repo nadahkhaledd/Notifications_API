@@ -121,6 +121,34 @@ public class NotificationController {
 		serviceMAIL.delete(id);
 	}
 	
+	@GetMapping("/templates5/")
+	public ResponseEntity<SMS> getFirstRowSMS()
+	{
+		
+		try {
+			SMS first = serviceSMS.getFirstID();
+			return new ResponseEntity<SMS>(first, HttpStatus.OK);
+		}
+		catch(NoSuchElementException e) {
+			return new ResponseEntity<SMS>(HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
+	@GetMapping("/templates6/")
+	public ResponseEntity<MAIL> getFirstRowMAIL()
+	{
+		
+		try {
+			MAIL first = serviceMAIL.getFirstID();
+			return new ResponseEntity<MAIL>(first, HttpStatus.OK);
+		}
+		catch(NoSuchElementException e) {
+			return new ResponseEntity<MAIL>(HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
 	@GetMapping("/templates2/{type}/{category}")
 	public ResponseEntity<?> getRequest(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
