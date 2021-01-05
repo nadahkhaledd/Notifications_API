@@ -10,7 +10,7 @@ import ch.qos.logback.core.FileAppender;
 
 public class Log {
 	
-	public static void Logging() {
+	public static void logging() {
 		FileAppender<ILoggingEvent> myAppender = new FileAppender<ILoggingEvent>();
 		LoggerContext loggerContext=(LoggerContext)LoggerFactory.getILoggerFactory();
 		loggerContext.reset();

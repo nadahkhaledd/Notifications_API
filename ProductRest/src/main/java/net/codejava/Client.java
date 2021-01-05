@@ -13,14 +13,16 @@ public class Client {
 	private static final String DELETE_MAIL = "http://localhost:8080/templates4/{id}";
 	static RestTemplate restTemplate = new RestTemplate();
 	
-	public static void dequeueSMS() {
+	public static String dequeueSMS() {
 		try {
 			SMS obj = restTemplate.getForObject(GET_FIRST_ID_SMS, SMS.class);
-			System.out.println("Notification sent : " + obj.getContent() + "\n");
+			String output = "Notification: [" + obj.getContent() + "] sent to : " + obj.getTarget();
 			deleteSMS(obj.getId());
+			return output;
 		}
 		catch(Exception e) {
-			System.out.println("Queue is empty");
+			String output = "Queue is empty";
+			return output;
 		}
 	}
 	
@@ -30,14 +32,16 @@ public class Client {
 		restTemplate.delete(DELETE_SMS, param);
 	}
 	
-	public static void dequeueMAIL() {
+	public static String dequeueMAIL() {
 		try {
 			MAIL obj = restTemplate.getForObject(GET_FIRST_ID_MAIL, MAIL.class);
-			System.out.println("Notification sent: " + obj.getContent() + "\n");
+			String output = "Notification: [" + obj.getContent() + "] sent to : " + obj.getTarget();
 			deleteMAIL(obj.getId());
-		} 
-		catch (Exception e)  {
-			System.out.println("Queue is empty");
+			return output;
+		}
+		catch(Exception e) {
+			String output = "Queue is empty";
+			return output;
 		}
 	}
 	

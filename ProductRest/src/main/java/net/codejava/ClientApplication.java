@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class ClientApplication {
 	public static void main(String[] args) {
-		Log.Logging();
+		Log.logging();
 		Scanner input = new Scanner(System.in);
 		while(true) {
-			System.out.println("Do you want to dequeue to SMS or MAIL ?");
+			System.out.println("Do you want to dequeue from SMS or MAIL ?");
 			String choice = input.nextLine();
 			if(choice.equalsIgnoreCase("SMS")) {
-				Client.dequeueSMS();
+				System.out.println(Client.dequeueSMS());
 				break;
 			}
 			else if(choice.equalsIgnoreCase("MAIL")) {
-				Client.dequeueMAIL();
+				System.out.println(Client.dequeueMAIL());
 				break;
 			}
 			else {
