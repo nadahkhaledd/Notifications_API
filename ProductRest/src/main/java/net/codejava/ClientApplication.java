@@ -7,7 +7,7 @@ public class ClientApplication {
 		Log.Logging();
 		Scanner input = new Scanner(System.in);
 		while(true) {
-			System.out.println("Do you want to dequeue from SMS or MAIL ?");
+			System.out.println("Do you want to dequeue to SMS or MAIL ?");
 			String choice = input.nextLine();
 			if(choice.equalsIgnoreCase("SMS")) {
 				Client.dequeueSMS();
