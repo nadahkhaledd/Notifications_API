@@ -22,6 +22,7 @@ public class Client {
 		}
 		catch(Exception e) {
 			String output = "Queue is empty";
+			e.printStackTrace();
 			return output;
 		}
 	}

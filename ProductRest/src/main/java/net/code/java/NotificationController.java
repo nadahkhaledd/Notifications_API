@@ -146,14 +146,14 @@ public class NotificationController {
 	@GetMapping("/templates2/{type}/{category}")
 	public ResponseEntity<?> getRequest(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
-			 String response = validateRequest(request);			 
+			 String response = validateRequest(request);		 
 			 Template template = service.getByType(type, category);
 		     Notification obj = new Notification();
 			 obj = prepareNotification(template.getText(), request.getValues());
-			 /*if(!response.equalsIgnoreCase("Valid")) {
+			 if(!response.equalsIgnoreCase("Valid")) {
                  saveNotification(obj.getContent(), request.getMethod(), request.getTarget(), "failed");
                  return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
-             }*/
+             }
              saveNotification(obj.getContent(), request.getMethod(), request.getTarget(), "success");
              return new ResponseEntity<>(template, HttpStatus.OK);
 		}
