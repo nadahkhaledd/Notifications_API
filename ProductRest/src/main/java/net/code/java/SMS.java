@@ -11,16 +11,19 @@ public class SMS {
 	String content;
 	int id;
 	String target;
+	String state;
+	
 	
 	public SMS() {
 		
 	}
 	
-	public SMS(String content, int id, String target) {
+	public SMS(String content, int id, String target, String state) {
 		super();
 		this.content = content;
 		this.id = id;
 		this.target = target;
+		this.state = state;
 	}
 	
 	public String getContent() {
@@ -48,4 +51,14 @@ public class SMS {
 	public void setTarget(String target) {
 		this.target = target;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	
 }
