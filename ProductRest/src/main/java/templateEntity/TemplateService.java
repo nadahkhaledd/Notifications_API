@@ -1,4 +1,4 @@
-package net.codejava;
+package templateEntity;
 
 import java.util.List;
 

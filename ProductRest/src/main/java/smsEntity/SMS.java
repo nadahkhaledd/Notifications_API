@@ -1,4 +1,4 @@
-package net.codejava;
+package smsEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

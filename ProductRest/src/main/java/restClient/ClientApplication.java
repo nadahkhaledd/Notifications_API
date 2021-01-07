@@ -1,4 +1,4 @@
-package net.codejava;
+package restClient;
 
 import java.util.Scanner;
 

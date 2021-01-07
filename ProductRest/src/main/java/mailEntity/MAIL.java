@@ -1,4 +1,4 @@
-package net.codejava;
+package mailEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package net.codejava;
+package smsEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package net.codejava;
+package restClient;
 
 import org.slf4j.LoggerFactory;
 

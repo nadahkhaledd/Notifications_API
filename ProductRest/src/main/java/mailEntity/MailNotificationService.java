@@ -1,4 +1,4 @@
-package net.codejava;
+package mailEntity;
 
 import java.util.List;
 

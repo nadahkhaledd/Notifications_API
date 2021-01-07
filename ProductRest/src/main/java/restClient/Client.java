@@ -1,9 +1,12 @@
-package net.codejava;
+package restClient;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.client.RestTemplate;
+
+import mailEntity.MAIL;
+import smsEntity.SMS;
 
 public class Client {
 	

@@ -1,4 +1,4 @@
-package net.codejava;
+package notificationOperations;
 
 import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import mailEntity.MAIL;
+import mailEntity.MailNotificationService;
+import smsEntity.SMS;
+import smsEntity.SMSNotificationService;
+import templateEntity.Template;
+import templateEntity.TemplateService;
 
 @RestController
 public class NotificationController {
