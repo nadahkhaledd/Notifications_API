@@ -74,18 +74,20 @@ public class NotificationController {
 		return response;
 	}
 	
-	public void saveNotification(String content, String method, String target) {
+	public void saveNotification(String content, String method, String target, String state) {
 		SMS notifySMS = new SMS();
 		MAIL notifyMAIL = new MAIL();
 		if(method.equalsIgnoreCase("sms")) {
 			notifySMS.setContent(content);
 			notifySMS.setTarget(target);
+			notifySMS.setState(state);
 			serviceSMS.save(notifySMS);
 		}
 		
 		else {
 			notifyMAIL.setContent(content);
 			notifyMAIL.setTarget(target);
+			notifyMAIL.setState(state);
 			serviceMAIL.save(notifyMAIL);
 		}
 	}
@@ -151,16 +153,16 @@ public class NotificationController {
 	@GetMapping("/templates2/{type}/{category}")
 	public ResponseEntity<?> getRequest(@PathVariable String type ,@PathVariable String category,@RequestBody Request request ) {
 		try {
-			 String response = validateRequest(request);
-			 if(!response.equalsIgnoreCase("Valid")) {
-				 return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
-			 }
-			 
+			 String response = validateRequest(request);			 
 			 Template template = service.getByType(type, category);
 		     Notification obj = new Notification();
 			 obj = prepareNotification(template.getText(), request.getValues());
-			 saveNotification(obj.getContent(), request.getMethod(), request.getTarget());
-			 return new ResponseEntity<>(template, HttpStatus.OK);
+			 /*if(!response.equalsIgnoreCase("Valid")) {
+                 saveNotification(obj.getContent(), request.getMethod(), request.getTarget(), "failed");
+                 return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
+             }*/
+             saveNotification(obj.getContent(), request.getMethod(), request.getTarget(), "success");
+             return new ResponseEntity<>(template, HttpStatus.OK);
 		}
 		
 		catch(NoSuchElementException e) {

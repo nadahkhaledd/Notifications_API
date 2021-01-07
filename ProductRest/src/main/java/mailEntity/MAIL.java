@@ -11,16 +11,19 @@ public class MAIL {
 	int id;
 	String content;
 	String target;
+	String state;
+	
 	
 	public MAIL() {
 		super();
 	}
 
-	public MAIL(int id, String content, String target) {
+	public MAIL(int id, String content, String target, String state) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.target = target;
+		this.state = state;
 	}
 	
 	@Id
@@ -48,5 +51,15 @@ public class MAIL {
 	public void setTarget(String target) {
 		this.target = target;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	
 	
 }
