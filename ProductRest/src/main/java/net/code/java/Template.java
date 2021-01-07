@@ -1,4 +1,4 @@
-package templateEntity;
+package net.code.java;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

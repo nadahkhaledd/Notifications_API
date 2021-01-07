@@ -1,4 +1,4 @@
-package notificationOperations;
+package net.code.java;
 
 public class Request {
 	
