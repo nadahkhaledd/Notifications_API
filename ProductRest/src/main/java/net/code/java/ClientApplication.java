@@ -5,17 +5,18 @@ import java.util.Scanner;
 public class ClientApplication {
 	public static void main(String[] args) {
 		Log.logging();
-		DequeueInterface client = new Client();
 		Scanner input = new Scanner(System.in);
 		while(true) {
 			System.out.println("Do you want to dequeue from SMS or MAIL ?");
 			String choice = input.nextLine();
 			if(choice.equalsIgnoreCase("SMS")) {
-				System.out.println(client.dequeueSMS());
+				DequeueStrategy obj = new DequeueSMS();
+				System.out.println(obj.dequeue());
 				break;
 			}
 			else if(choice.equalsIgnoreCase("MAIL")) {
-				System.out.println(client.dequeueMAIL());
+				DequeueStrategy obj = new DequeueMAIL();
+				System.out.println(obj.dequeue());
 				break;
 			}
 			else {

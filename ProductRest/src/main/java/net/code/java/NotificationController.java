@@ -159,6 +159,10 @@ public class NotificationController {
 		}
 		
 		catch(NoSuchElementException e) {
+			return new ResponseEntity<Template>(HttpStatus.FORBIDDEN);
+		}
+		
+		catch(Exception e) {
 			return new ResponseEntity<Template>(HttpStatus.NOT_FOUND);
 		}
 	}  
